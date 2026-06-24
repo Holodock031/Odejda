@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>wayup - Магазин женской одежды</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Дополнительные стили для кнопки Каталог */
+        .catalog-floating-btn {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            z-index: 999;
+            background: var(--primary);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 15px rgba(232, 62, 140, 0.3);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .catalog-floating-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(232, 62, 140, 0.4);
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .catalog-floating-btn {
+                top: auto;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 10px 20px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .hero-buttons .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Плавающая кнопка Каталог -->
+    <a href="catalog.html" class="catalog-floating-btn">
+        <i class="fas fa-bars"></i>
+        <span>Каталог</span>
+    </a>
+    
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">way<span>up</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link active">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="auth.html" id="auth-link">Войти</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Герой-секция -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Новая коллекция осень-зима 2025</h1>
+                    <p>Откройте для себя уникальные образы от ведущих дизайнеров. Стиль, качество и комфорт в каждой детали.</p>
+                    <div class="hero-buttons">
+                        <a href="catalog.html" class="btn btn-primary">Смотреть коллекцию</a>
+                        <button id="quick-catalog-btn" class="btn catalog-main-btn">
+                            <i class="fas fa-bars"></i> Быстрый каталог
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Преимущества -->
+        <section class="advantages">
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="advantages-grid">
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="fas fa-shipping-fast"></i>
+                        </div>
+                        <h3>Быстрая доставка</h3>
+                        <p>Доставляем заказы по всей России за 2-7 дней</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="fas fa-undo-alt"></i>
+                        </div>
+                        <h3>Легкий возврат</h3>
+                        <p>Возврат товара в течение 30 дней без вопросов</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="fas fa-award"></i>
+                        </div>
+                        <h3>Гарантия качества</h3>
+                        <p>Все товары проходят строгий контроль качества</p>
+                    </div>
+                    <div class="advantage-card">
+                        <div class="advantage-icon">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                        <h3>Выгодные цены</h3>
+                        <p>Регулярные скидки и специальные предложения</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Популярные товары -->
+        <section class="popular-products">
+            <div class="container">
+                <h2 class="section-title">Популярные товары</h2>
+                <div class="products-grid" id="popular-products">
+                    <!-- Товары будут загружены через JavaScript -->
+                </div>
+                <div class="text-center" style="text-align: center; margin-top: 30px;">
+                    <a href="catalog.html" class="btn btn-secondary">Весь каталог</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- О нас -->
+        <section class="about">
+            <div class="container">
+                <div class="about-content">
+                    <div class="about-text">
+                        <h2>wayup — ваш стиль, ваша уверенность</h2>
+                        <p>Мы создаем моду, которая подчеркивает индивидуальность. Наша миссия - помочь каждой женщине найти свой уникальный стиль и чувствовать себя уверенно в любой ситуации.</p>
+                        <p>В нашем ассортименте только качественные материалы и продуманные до мелочей модели. Мы следим за трендами, но не забываем о классике.</p>
+                    </div>
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=85" alt="О нас" 
+                             onerror="this.src='https://via.placeholder.com/800x600?text=wayup'">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+    </main>
+
+    
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>wayup</h3>
+                    <p>Магазин женской одежды с 2015 года. Мы создаем моду для уверенных в себе женщин.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html?category=dresses">Платья</a></li>
+                        <li><a href="catalog.html?category=tops">Верхняя одежда</a></li>
+                        <li><a href="catalog.html?category=pants">Брюки и юбки</a></li>
+                        <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат и обмен</a></li>
+                        <li><a href="#">Таблица размеров</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="http://localhost:8080/admin/" target="_blank">Админ-панель</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Модная, 25</p>
+                    <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@wayup.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 wayup. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <script src="js/main.js"></script>
+    <script src="js/init.js"></script>
+    <script>
+        // Загрузка популярных товаров на главной странице
+        document.addEventListener('DOMContentLoaded', function() {
+            loadPopularProducts();
+            
+            // Обновление статуса авторизации
+            updateAuthStatus();
+            
+            // Загрузка количества товаров в корзине
+            updateCartCount();
+            
+            // Настройка быстрой кнопки каталога
+            setupQuickCatalog();
+        });
+        
+        function loadPopularProducts() {
+            // Используем fallback товары если data.json не загрузился
+            const fallbackProducts = [
+                {
+                    id: 1,
+                    name: "Элегантное черное платье",
+                    price: 3499,
+                    category: "dresses",
+                    description: "Идеальное платье для вечернего выхода.",
+                    image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=85",
+                    rating: 4.8,
+                    reviews: 42
+                },
+                {
+                    id: 2,
+                    name: "Белая блузка с рюшами",
+                    price: 2199,
+                    category: "tops",
+                    description: "Женственная блузка с рюшами.",
+                    image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&auto=format&fit=crop&w=686&q=85",
+                    rating: 4.5,
+                    reviews: 28
+                },
+                {
+                    id: 3,
+                    name: "Кожаная юбка миди",
+                    price: 4599,
+                    category: "pants",
+                    description: "Стильная кожаная юбка.",
+                    image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=85",
+                    rating: 4.7,
+                    reviews: 35
+                },
+                {
+                    id: 4,
+                    name: "Джинсы с высокой талией",
+                    price: 2999,
+                    category: "pants",
+                    description: "Удобные джинсы с высокой талией.",
+                    image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&auto=format&fit=crop&w=726&q=85",
+                    rating: 4.6,
+                    reviews: 56
+                }
+            ];
+            
+            const container = document.getElementById('popular-products');
+            if (!container) return;
+            
+            let html = '';
+            fallbackProducts.forEach(product => {
+                html += `
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" 
+                                 onerror="this.src='https://via.placeholder.com/300x400?text=wayup'">
+                            <button class="quick-add-btn" data-id="${product.id}">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                        </div>
+                        <div class="product-info">
+                            <h3 class="product-title">${product.name}</h3>
+                            <div class="product-price">${product.price.toLocaleString()} руб</div>
+                            <div class="product-actions">
+                                <button class="btn add-to-cart-btn" data-id="${product.id}">
+                                    <i class="fas fa-shopping-cart"></i> В корзину
+                                </button>
+                                <a href="catalog.html#product-${product.id}" class="btn view-details-btn">
+                                    <i class="fas fa-info-circle"></i> Подробнее
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            
+            // Добавляем обработчики для кнопок "В корзину"
+            document.querySelectorAll('.quick-add-btn, .add-to-cart-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart(productId);
+                });
+            });
+        }
+        
+        function addToCart(productId) {
+            // Получаем корзину из localStorage
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Находим товар
+            const fallbackProducts = [
+                { id: 1, name: "Элегантное черное платье", price: 3499, image: "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=85" },
+                { id: 2, name: "Белая блузка с рюшами", price: 2199, image: "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&auto=format&fit=crop&w=686&q=85" },
+                { id: 3, name: "Кожаная юбка миди", price: 4599, image: "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=85" },
+                { id: 4, name: "Джинсы с высокой талией", price: 2999, image: "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&auto=format&fit=crop&w=726&q=85" }
+            ];
+            
+            const product = fallbackProducts.find(p => p.id === productId);
+            if (!product) return;
+            
+            // Проверяем, есть ли товар уже в корзине
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    image: product.image,
+                    quantity: 1
+                });
+            }
+            
+            // Сохраняем корзину
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Обновляем счетчик
+            updateCartCount();
+            
+            // Показываем уведомление
+            showNotification(`${product.name} добавлен в корзину!`);
+        }
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            cartCountElements.forEach(element => {
+                element.textContent = totalItems;
+                element.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            });
+        }
+        
+        function updateAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            const authLink = document.getElementById('auth-link');
+            
+            if (user) {
+                authLink.textContent = user.name.split(' ')[0];
+                authLink.href = 'profile.html';
+            } else {
+                authLink.textContent = 'Войти';
+                authLink.href = 'auth.html';
+            }
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        function setupQuickCatalog() {
+            const quickCatalogBtn = document.getElementById('quick-catalog-btn');
+            if (quickCatalogBtn) {
+                quickCatalogBtn.addEventListener('click', function() {
+                    // Создаем выпадающее меню
+                    const menu = document.createElement('div');
+                    menu.style.cssText = `
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        background: white;
+                        box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+                        border-radius: 10px;
+                        z-index: 1000;
+                        min-width: 200px;
+                        padding: 10px 0;
+                        margin-top: 10px;
+                    `;
+                    
+                    menu.innerHTML = `
+                        <a href="catalog.html?category=dresses" style="display: block; padding: 12px 20px; color: #333; text-decoration: none;">
+                            <i class="fas fa-tshirt" style="margin-right: 10px; color: var(--primary);"></i> Платья
+                        </a>
+                        <a href="catalog.html?category=tops" style="display: block; padding: 12px 20px; color: #333; text-decoration: none;">
+                            <i class="fas fa-vest" style="margin-right: 10px; color: var(--primary);"></i> Верхняя одежда
+                        </a>
+                        <a href="catalog.html?category=pants" style="display: block; padding: 12px 20px; color: #333; text-decoration: none;">
+                            <i class="fas fa-female" style="margin-right: 10px; color: var(--primary);"></i> Брюки и юбки
+                        </a>
+                        <a href="catalog.html?category=accessories" style="display: block; padding: 12px 20px; color: #333; text-decoration: none;">
+                            <i class="fas fa-gem" style="margin-right: 10px; color: var(--primary);"></i> Аксессуары
+                        </a>
+                        <div style="border-top: 1px solid #eee; margin: 10px 0;"></div>
+                        <a href="catalog.html" style="display: block; padding: 12px 20px; color: var(--primary); font-weight: bold; text-decoration: none;">
+                            <i class="fas fa-list" style="margin-right: 10px;"></i> Весь каталог
+                        </a>
+                    `;
+                    
+                    this.appendChild(menu);
+                    
+                    // Закрытие при клике вне меню
+                    const closeMenu = (e) => {
+                        if (!quickCatalogBtn.contains(e.target)) {
+                            menu.remove();
+                            document.removeEventListener('click', closeMenu);
+                        }
+                    };
+                    
+                    setTimeout(() => {
+                        document.addEventListener('click', closeMenu);
+                    }, 100);
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль - wayup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">way<span>up</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a></li>
+                    <li><a href="profile.html" class="nav-link active">Профиль</a></li>
+                    <li><a href="auth.html" id="auth-link">Войти</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Личный кабинет</h1>
+                <p>Управляйте своими данными и заказами</p>
+            </div>
+            
+            <div class="profile-container">
+                <!-- Левая часть: Навигация по профилю -->
+                <div class="profile-sidebar">
+                    <div class="user-info">
+                        <div class="user-avatar" id="user-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <h3 id="user-name">Гость</h3>
+                        <p id="user-email"></p>
+                    </div>
+                    
+                    <nav class="profile-nav">
+                        <a href="#personal" class="profile-nav-link active">
+                            <i class="fas fa-user-circle"></i> Личные данные
+                        </a>
+                        <a href="#orders" class="profile-nav-link">
+                            <i class="fas fa-shopping-bag"></i> Мои заказы
+                        </a>
+                        <a href="#favorites" class="profile-nav-link">
+                            <i class="fas fa-heart"></i> Избранное
+                        </a>
+                        <a href="#addresses" class="profile-nav-link">
+                            <i class="fas fa-map-marker-alt"></i> Адреса доставки
+                        </a>
+                        <button class="btn btn-secondary btn-block" id="logout-btn">
+                            <i class="fas fa-sign-out-alt"></i> Выйти
+                        </button>
+                    </nav>
+                </div>
+                
+                <!-- Правая часть: Содержимое профиля -->
+                <div class="profile-content">
+                    <!-- Личные данные -->
+                    <div class="profile-section active" id="personal-section">
+                        <h2>Личные данные</h2>
+                        <form id="personal-form">
+                            <div class="form-group">
+                                <label for="name">Имя и фамилия</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Телефон</label>
+                                <input type="tel" id="phone">
+                            </div>
+                            <div class="form-group">
+                                <label for="birthdate">Дата рождения</label>
+                                <input type="date" id="birthdate">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+                        </form>
+                    </div>
+                    
+                    <!-- Мои заказы -->
+                    <div class="profile-section" id="orders-section">
+                        <h2>Мои заказы</h2>
+                        <div class="orders-list" id="orders-list">
+                            <!-- Заказы будут загружены динамически -->
+                        </div>
+                        <div class="no-orders" id="no-orders">
+                            <i class="fas fa-shopping-bag"></i>
+                            <h3>У вас еще нет заказов</h3>
+                            <p>Совершите первую покупку в нашем магазине</p>
+                            <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Избранное -->
+                    <div class="profile-section" id="favorites-section">
+                        <h2>Избранное</h2>
+                        <div class="favorites-grid" id="favorites-grid">
+                            <!-- Избранные товары будут загружены динамически -->
+                        </div>
+                        <div class="no-favorites" id="no-favorites">
+                            <i class="fas fa-heart"></i>
+                            <h3>В избранном пока пусто</h3>
+                            <p>Добавляйте товары в избранное, чтобы не потерять</p>
+                            <a href="catalog.html" class="btn btn-primary">Перейти в каталог</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Адреса доставки -->
+                    <div class="profile-section" id="addresses-section">
+                        <h2>Адреса доставки</h2>
+                        <div class="addresses-list" id="addresses-list">
+                            <!-- Адреса будут загружены динамически -->
+                        </div>
+                        <button class="btn btn-primary" id="add-address-btn">
+                            <i class="fas fa-plus"></i> Добавить новый адрес
+                        </button>
+                    </div>
+                    
+                    <!-- Сообщение для гостей -->
+                    <div class="guest-message" id="guest-message">
+                        <i class="fas fa-user-lock"></i>
+                        <h3>Доступ ограничен</h3>
+                        <p>Для доступа к личному кабинету необходимо войти в систему</p>
+                        <a href="auth.html" class="btn btn-primary">Войти в аккаунт</a>
+                        <a href="auth.html?register=true" class="btn btn-secondary">Зарегистрироваться</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>wayup</h3>
+                    <p>Магазин женской одежды с 2015 года. Мы создаем моду для уверенных в себе женщин.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html?category=dresses">Платья</a></li>
+                        <li><a href="catalog.html?category=tops">Верхняя одежда</a></li>
+                        <li><a href="catalog.html?category=pants">Брюки и юбки</a></li>
+                        <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат и обмен</a></li>
+                        <li><a href="#">Таблица размеров</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="http://localhost:8080/admin/" target="_blank">Админ-панель</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Модная, 25</p>
+                    <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@wayup.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 wayup. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно добавления адреса -->
+    <div class="modal" id="address-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body">
+                <h2>Добавить новый адрес</h2>
+                <form id="address-form">
+                    <div class="form-group">
+                        <label for="address-name">Название адреса (например, Дом, Работа)</label>
+                        <input type="text" id="address-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-city">Город</label>
+                        <input type="text" id="address-city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-street">Улица, дом, квартира</label>
+                        <input type="text" id="address-street" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address-zip">Почтовый индекс</label>
+                        <input type="text" id="address-zip">
+                    </div>
+                    <div class="form-group">
+                        <label for="address-comment">Комментарий для курьера</label>
+                        <textarea id="address-comment" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Сохранить адрес</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <script src="js/profile.js"></script>
+    <script src="js/init.js"></script>
+    <script>
+        // Инициализация профиля
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновление статуса авторизации
+            updateAuthStatus();
+            
+            // Загрузка количества товаров в корзине
+            updateCartCount();
+            
+            // Инициализация профиля
+            if (typeof initProfile === 'function') {
+                initProfile();
+            }
+        });
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            cartCountElements.forEach(element => {
+                element.textContent = totalItems;
+                element.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            });
+        }
+        
+        function updateAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const authLink = document.getElementById('auth-link');
+            
+            if (user) {
+                authLink.textContent = 'Выйти';
+                authLink.href = '#';
+                authLink.onclick = function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('user');
+                    updateAuthStatus();
+                    showNotification('Вы вышли из аккаунта');
+                    // Перенаправляем на главную страницу
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                };
+            } else {
+                authLink.textContent = 'Войти';
+                authLink.href = 'auth.html';
+                authLink.onclick = null;
+            }
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

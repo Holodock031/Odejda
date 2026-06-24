@@ -1,0 +1,100 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Элегантное черное платье",
+      "price": 3499,
+      "category": "dresses",
+      "description": "Идеальное платье для вечернего выхода. Сшито из качественного материала, хорошо сидит по фигуре.",
+      "image": "https://images.unsplash.com/photo-1566174053879-31528523f8ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": 2,
+      "name": "Белая блузка с рюшами",
+      "price": 2199,
+      "category": "tops",
+      "description": "Женственная блузка с рюшами на манжетах и воротнике. Подходит для офиса и встреч с друзьями.",
+      "image": "https://images.unsplash.com/photo-1581044777550-4cfa60707c03?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=686&q=80"
+    },
+    {
+      "id": 3,
+      "name": "Кожаная юбка миди",
+      "price": 4599,
+      "category": "pants",
+      "description": "Стильная кожаная юбка длины миди. Качественная искусственная кожа, удобная посадка.",
+      "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": 4,
+      "name": "Джинсы с высокой талией",
+      "price": 2999,
+      "category": "pants",
+      "description": "Удобные джинсы с высокой талией, прямого кроя. Сделаны из эластичного денима.",
+      "image": "https://images.unsplash.com/photo-1542272604-787c3835535d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=726&q=80"
+    },
+    {
+      "id": 5,
+      "name": "Летнее платье с цветочным принтом",
+      "price": 2799,
+      "category": "dresses",
+      "description": "Легкое летнее платье из хлопка с ярким цветочным принтом. Идеально для жарких дней.",
+      "image": "https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=746&q=80"
+    },
+    {
+      "id": 6,
+      "name": "Теплый кардиган",
+      "price": 3299,
+      "category": "tops",
+      "description": "Мягкий теплый кардиган из шерсти. Отлично подходит для прохладной погоды.",
+      "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+    },
+    {
+      "id": 7,
+      "name": "Шелковый шарф",
+      "price": 1299,
+      "category": "accessories",
+      "description": "Элегантный шелковый шарф с принтом. Можно носить как шарф, платок или повязку на голову.",
+      "image": "https://images.unsplash.com/photo-1558769132-cb1baded1c41?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": 8,
+      "name": "Кожаная сумка",
+      "price": 5899,
+      "category": "accessories",
+      "description": "Качественная кожаная сумка через плечо. Вместительная, с несколькими отделениями.",
+      "image": "https://images.unsplash.com/photo-1584917865442-de89df76afd3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=735&q=80"
+    },
+    {
+      "id": 9,
+      "name": "Красное коктейльное платье",
+      "price": 4199,
+      "category": "dresses",
+      "description": "Яркое красное платье для вечеринок и торжественных мероприятий.",
+      "image": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": 10,
+      "name": "Свитшот с принтом",
+      "price": 1899,
+      "category": "tops",
+      "description": "Удобный свитшот из хлопка с модным принтом. Идеально для повседневной носки.",
+      "image": "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=764&q=80"
+    },
+    {
+      "id": 11,
+      "name": "Кожаные брюки",
+      "price": 4999,
+      "category": "pants",
+      "description": "Стильные кожаные брюки облегающего кроя. Сделают любой образ эффектным.",
+      "image": "https://images.unsplash.com/photo-1552902865-b72c031ac5ea?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    },
+    {
+      "id": 12,
+      "name": "Серьги с жемчугом",
+      "price": 899,
+      "category": "accessories",
+      "description": "Элегантные серьги с искусственным жемчугом. Подходят для любого случая.",
+      "image": "https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+    }
+  ]
+}

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог - wayup</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<style>
+/* Фикс для кнопок в каталоге */
+.product-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.add-to-cart-btn {
+    background-color: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.add-to-cart-btn:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.view-details-btn {
+    background-color: var(--gray-600);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s;
+    flex: 1;
+}
+
+.view-details-btn:hover {
+    background-color: var(--gray-700);
+    transform: translateY(-2px);
+}
+
+/* Фикс для изображений товаров */
+.product-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Фикс для фильтров */
+.filter-btn {
+    padding: 10px 20px;
+    background-color: var(--gray-200);
+    border: 2px solid transparent;
+    border-radius: 30px;
+    color: var(--gray-700);
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 500;
+}
+
+.filter-btn.active {
+    background-color: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.filter-btn:hover:not(.active) {
+    background-color: var(--gray-300);
+}
+</style>
+<body>
+    <!-- Шапка сайта -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">way<span>up</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html" class="nav-link active">Каталог</a></li>
+                    <li><a href="cart.html" class="cart-link">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count">0</span>
+                    </a></li>
+                    <li><a href="profile.html">Профиль</a></li>
+                    <li><a href="auth.html" id="auth-link">Войти</a></li>
+                </ul>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Каталог товаров</h1>
+                <p>Найдите свой идеальный образ среди сотен моделей</p>
+            </div>
+            
+            <!-- Фильтры -->
+            <div class="catalog-filters">
+                <div class="filter-categories">
+                    <button class="filter-btn active" data-category="all">Все товары</button>
+                    <button class="filter-btn" data-category="dresses">Платья</button>
+                    <button class="filter-btn" data-category="tops">Верхняя одежда</button>
+                    <button class="filter-btn" data-category="pants">Брюки и юбки</button>
+                    <button class="filter-btn" data-category="accessories">Аксессуары</button>
+                </div>
+                <div class="filter-search">
+                    <input type="text" id="search-input" placeholder="Поиск товаров...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="filter-sort">
+                    <select id="sort-select">
+                        <option value="default">Сортировка</option>
+                        <option value="price-asc">По возрастанию цены</option>
+                        <option value="price-desc">По убыванию цены</option>
+                        <option value="name-asc">По названию (А-Я)</option>
+                        <option value="name-desc">По названию (Я-А)</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Сетка товаров -->
+            <div class="products-grid" id="products-container">
+                <!-- Товары будут загружены через JavaScript -->
+            </div>
+            
+            <!-- Пагинация -->
+            <div class="pagination" id="pagination">
+                <button id="prev-page" disabled><i class="fas fa-chevron-left"></i></button>
+                <div class="page-numbers" id="page-numbers"></div>
+                <button id="next-page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+            <!-- Сообщение если товаров нет -->
+            <div class="no-products" id="no-products" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>Товары не найдены</h3>
+                <p>Попробуйте изменить параметры поиска или выберите другую категорию</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Подвал -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>wayup</h3>
+                    <p>Магазин женской одежды с 2015 года. Мы создаем моду для уверенных в себе женщин.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html?category=dresses">Платья</a></li>
+                        <li><a href="catalog.html?category=tops">Верхняя одежда</a></li>
+                        <li><a href="catalog.html?category=pants">Брюки и юбки</a></li>
+                        <li><a href="catalog.html?category=accessories">Аксессуары</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Помощь</h3>
+                    <ul>
+                        <li><a href="#">Доставка и оплата</a></li>
+                        <li><a href="#">Возврат и обмен</a></li>
+                        <li><a href="#">Таблица размеров</a></li>
+                        <li><a href="#">Контакты</a></li>
+                        <li><a href="http://localhost:8080/admin/" target="_blank">Админ-панель</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Москва, ул. Модная, 25</p>
+                    <p><i class="fas fa-phone"></i> +7 (495) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@wayup.ru</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 wayup. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Модальное окно товара -->
+    <div class="modal" id="product-modal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            <div class="modal-body" id="modal-body">
+                <!-- Контент будет загружен динамически -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Уведомление -->
+    <div class="notification" id="notification"></div>
+
+    <script src="js/catalog.js"></script>
+    <script src="js/init.js"></script>
+    <script>
+        // Инициализация каталога
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновление статуса авторизации
+            updateAuthStatus();
+            
+            // Загрузка количества товаров в корзине
+            updateCartCount();
+            
+            // Инициализация каталога
+            if (typeof initCatalog === 'function') {
+                initCatalog();
+            }
+        });
+        
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            cartCountElements.forEach(element => {
+                element.textContent = totalItems;
+                element.style.display = totalItems > 0 ? 'inline-block' : 'none';
+            });
+        }
+        
+        function updateAuthStatus() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const authLink = document.getElementById('auth-link');
+            
+            if (user) {
+                authLink.textContent = 'Выйти';
+                authLink.href = '#';
+                authLink.onclick = function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('user');
+                    updateAuthStatus();
+                    showNotification('Вы вышли из аккаунта');
+                };
+            } else {
+                authLink.textContent = 'Войти';
+                authLink.href = 'auth.html';
+                authLink.onclick = null;
+            }
+        }
+        
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

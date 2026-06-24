@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестирование API - wayup</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .test-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+        
+        button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .result {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .result pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .success {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .error {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        
+        .status.online {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .server-status {
+            padding: 15px;
+            background: #e7f3ff;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border-left: 4px solid #0066cc;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Тестирование API wayup</h1>
+        <p class="subtitle">Проверка работы Django Backend</p>
+        
+        <div class="server-status" id="server-status">
+            <strong>Статус сервера:</strong> <span id="status-text">Проверка...</span>
+        </div>
+        
+        <!-- Товары -->
+        <div class="test-section">
+            <h2>📦 Товары</h2>
+            <button onclick="testGetProducts()">Получить все товары</button>
+            <button onclick="testGetProduct()">Получить товар #1</button>
+            <button onclick="testFilterProducts()">Фильтр: Платья</button>
+            <button onclick="testSearchProducts()">Поиск: "платье"</button>
+            <div class="result" id="products-result"></div>
+        </div>
+        
+        <!-- Категории -->
+        <div class="test-section">
+            <h2>📂 Категории</h2>
+            <button onclick="testGetCategories()">Получить категории</button>
+            <div class="result" id="categories-result"></div>
+        </div>
+        
+        <!-- Авторизация -->
+        <div class="test-section">
+            <h2>🔐 Авторизация</h2>
+            <div class="input-group">
+                <label>Username:</label>
+                <input type="text" id="username" value="admin" placeholder="admin">
+            </div>
+            <div class="input-group">
+                <label>Password:</label>
+                <input type="password" id="password" value="admin123" placeholder="admin123">
+            </div>
+            <button onclick="testLogin()">Войти</button>
+            <button onclick="testCurrentUser()">Текущий пользователь</button>
+            <button onclick="testLogout()">Выйти</button>
+            <div class="result" id="auth-result"></div>
+        </div>
+        
+        <!-- Заказы -->
+        <div class="test-section">
+            <h2>🛒 Заказы</h2>
+            <button onclick="testCreateOrder()">Создать тестовый заказ</button>
+            <button onclick="testGetOrders()">Мои заказы</button>
+            <div class="result" id="orders-result"></div>
+        </div>
+        
+        <!-- Все тесты -->
+        <div class="test-section">
+            <h2>🚀 Запустить все тесты</h2>
+            <button onclick="runAllTests()" style="background: #28a745;">Запустить все тесты</button>
+            <div class="result" id="all-tests-result"></div>
+        </div>
+    </div>
+    
+    <script src="js/api.js"></script>
+    <script>
+        // Проверка статуса сервера
+        async function checkServerStatus() {
+            try {
+                const response = await fetch('http://localhost:8080/api/products/');
+                if (response.ok) {
+                    document.getElementById('status-text').innerHTML = 
+                        '<span class="status online">✅ Онлайн</span>';
+                } else {
+                    throw new Error('Server error');
+                }
+            } catch (error) {
+                document.getElementById('status-text').innerHTML = 
+                    '<span class="status offline">❌ Офлайн</span> - Запустите backend: cd backend && start.bat';
+            }
+        }
+        
+        // Утилита для отображения результата
+        function showResult(elementId, data, isError = false) {
+            const element = document.getElementById(elementId);
+            const className = isError ? 'error' : 'success';
+            const status = isError ? '❌ Ошибка' : '✅ Успешно';
+            
+            element.innerHTML = `
+                <div class="${className}">${status}</div>
+                <pre>${JSON.stringify(data, null, 2)}</pre>
+            `;
+        }
+        
+        // Тесты товаров
+        async function testGetProducts() {
+            try {
+                const data = await wayupAPI.getProducts();
+                showResult('products-result', {
+                    count: data.results.length,
+                    products: data.results.slice(0, 3)
+                });
+            } catch (error) {
+                showResult('products-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testGetProduct() {
+            try {
+                const data = await wayupAPI.getProduct(1);
+                showResult('products-result', data);
+            } catch (error) {
+                showResult('products-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testFilterProducts() {
+            try {
+                const data = await wayupAPI.getProducts({ category: 'dresses' });
+                showResult('products-result', {
+                    count: data.results.length,
+                    products: data.results
+                });
+            } catch (error) {
+                showResult('products-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testSearchProducts() {
+            try {
+                const data = await wayupAPI.getProducts({ search: 'платье' });
+                showResult('products-result', {
+                    count: data.results.length,
+                    products: data.results
+                });
+            } catch (error) {
+                showResult('products-result', { error: error.message }, true);
+            }
+        }
+        
+        // Тесты категорий
+        async function testGetCategories() {
+            try {
+                const data = await wayupAPI.getCategories();
+                showResult('categories-result', data);
+            } catch (error) {
+                showResult('categories-result', { error: error.message }, true);
+            }
+        }
+        
+        // Тесты авторизации
+        async function testLogin() {
+            try {
+                const username = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                const data = await wayupAPI.login(username, password);
+                showResult('auth-result', data);
+            } catch (error) {
+                showResult('auth-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testCurrentUser() {
+            try {
+                const data = await wayupAPI.getCurrentUser();
+                showResult('auth-result', data);
+            } catch (error) {
+                showResult('auth-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testLogout() {
+            try {
+                const data = await wayupAPI.logout();
+                showResult('auth-result', data);
+            } catch (error) {
+                showResult('auth-result', { error: error.message }, true);
+            }
+        }
+        
+        // Тесты заказов
+        async function testCreateOrder() {
+            try {
+                const data = await wayupAPI.createOrder({
+                    items: [
+                        { product_id: 1, quantity: 2 },
+                        { product_id: 2, quantity: 1 }
+                    ],
+                    customer_name: 'Тестовый Пользователь',
+                    customer_email: 'test@example.com',
+                    customer_phone: '+7 999 999-99-99',
+                    delivery_address: 'Москва, ул. Тестовая, д. 1'
+                });
+                showResult('orders-result', data);
+            } catch (error) {
+                showResult('orders-result', { error: error.message }, true);
+            }
+        }
+        
+        async function testGetOrders() {
+            try {
+                const data = await wayupAPI.getOrders();
+                showResult('orders-result', data);
+            } catch (error) {
+                showResult('orders-result', { error: error.message }, true);
+            }
+        }
+        
+        // Запуск всех тестов
+        async function runAllTests() {
+            const resultDiv = document.getElementById('all-tests-result');
+            resultDiv.innerHTML = '<div>⏳ Выполнение тестов...</div>';
+            
+            const results = [];
+            
+            // Тест 1: Товары
+            try {
+                const products = await wayupAPI.getProducts();
+                results.push({ test: 'Получение товаров', status: '✅', count: products.results.length });
+            } catch (error) {
+                results.push({ test: 'Получение товаров', status: '❌', error: error.message });
+            }
+            
+            // Тест 2: Категории
+            try {
+                const categories = await wayupAPI.getCategories();
+                results.push({ test: 'Получение категорий', status: '✅', count: categories.length });
+            } catch (error) {
+                results.push({ test: 'Получение категорий', status: '❌', error: error.message });
+            }
+            
+            // Тест 3: Авторизация
+            try {
+                const auth = await wayupAPI.login('admin', 'admin123');
+                results.push({ test: 'Авторизация', status: '✅', user: auth.user.username });
+            } catch (error) {
+                results.push({ test: 'Авторизация', status: '❌', error: error.message });
+            }
+            
+            // Тест 4: Создание заказа
+            try {
+                const order = await wayupAPI.createOrder({
+                    items: [{ product_id: 1, quantity: 1 }],
+                    customer_name: 'Test',
+                    customer_email: 'test@test.com',
+                    customer_phone: '+7 999 999-99-99',
+                    delivery_address: 'Test Address'
+                });
+                results.push({ test: 'Создание заказа', status: '✅', order_id: order.id });
+            } catch (error) {
+                results.push({ test: 'Создание заказа', status: '❌', error: error.message });
+            }
+            
+            showResult('all-tests-result', results);
+        }
+        
+        // Проверка при загрузке
+        checkServerStatus();
+    </script>
+</body>
+</html>
